@@ -32,9 +32,9 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">Profil <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="{{ route('about.detail') }}" style="color: white;">Tentang Kami</a></li>
-                                        <li><a href="#" style="color: white;">Visi Misi</a></li>
-                                        <li><a href="#" style="color: white;">Struktur Organisasi</a></li>
-                                        <li><a href="#" style="color: white;">Tri Krama Adhyaksa</a></li>
+                                        <li><a href="{{ route('visi-misi.detail') }}" style="color: white;">Visi Misi</a></li>
+                                        <li><a href="{{ route('struktur-organisasi.detail') }}" style="color: white;">Struktur Organisasi</a></li>
+                                        <li><a href="{{ route('tri-krama.detail') }}" style="color: white;">Tri Krama Adhyaksa</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
@@ -51,7 +51,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#blog" style="color: white;">Berita</a>
+                                    <a href="{{ route('news.all') }}" style="color: white;">Berita</a>
                                 </li>
                                 <li>
                                     <a href="#survey" style="color: white;">Survey</a>

@@ -276,7 +276,7 @@
                 </div>
 
                 <!-- Menu Berita -->
-                <a href="#" class="nav-link">
+                <a href="{{ route('news.index') }}" class="nav-link {{ request()->routeIs('news.*') ? 'active' : '' }}">
                     <i class="fas fa-newspaper"></i>
                     Berita
                 </a>

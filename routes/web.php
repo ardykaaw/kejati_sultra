@@ -8,12 +8,11 @@ use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\TriKramaController;
 use App\Http\Controllers\ReformasiBirokrasiController;
 use App\Http\Controllers\SaranaController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\WelcomeController;
 
 // Route untuk publik (tidak perlu auth)
-Route::get('/', function () {
-    $about = \App\Models\About::first();
-    return view('welcome', compact('about'));
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // Route publik untuk detail
 Route::get('/tentang-kami', function() {
@@ -58,4 +57,14 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('reformasi-birokrasi', ReformasiBirokrasiController::class);
         Route::resource('sarana', SaranaController::class);
     });
+
+    // Routes untuk Berita
+    Route::resource('news', NewsController::class);
 });
+
+// Route untuk Tri Krama Adhyaksa
+Route::get('/tri-krama', [TriKramaController::class, 'detail'])->name('tri-krama.detail');
+
+// Tambahkan route berikut
+Route::get('/berita', [NewsController::class, 'allNews'])->name('news.all');
+Route::get('/berita/{id}', [NewsController::class, 'show'])->name('news.show');

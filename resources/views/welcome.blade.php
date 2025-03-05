@@ -93,6 +93,131 @@
     .title2 {
       margin-bottom: 30px;
     }
+
+    .single-blog {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .single-blog:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+    }
+
+    .single-blog-img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .single-blog-img img {
+      transition: all 0.3s ease;
+    }
+
+    .single-blog:hover .single-blog-img img {
+      transform: scale(1.05);
+    }
+
+    .blog-meta {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .date-type {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .date-type i {
+      margin-right: 5px;
+      color: #006400;
+    }
+
+    .blog-text {
+      padding: 15px;
+    }
+
+    .blog-text h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .blog-text h4 a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .blog-text h4 a:hover {
+      color: #006400;
+    }
+
+    .blog-text p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .ready-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 15px;
+      background: #006400;
+      color: #fff;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .ready-btn:hover {
+      background: #005000;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .section-headline {
+      margin-bottom: 50px;
+    }
+
+    .section-headline h2 {
+      color: #333;
+      font-size: 32px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-headline h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: #006400;
+    }
+
+    .about-area {
+      background: #fff;
+      padding: 60px 0;
+    }
+
+    .well-left img {
+      transition: transform 0.3s ease;
+    }
+
+    .well-left img:hover {
+      transform: scale(1.02);
+    }
+
+    .about-content {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #666
+    }
   </style>
 
   <!-- =======================================================
@@ -144,8 +269,8 @@
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ route('about.detail') }}" style="color: white;">Tentang Kami</a></li>
                       <li><a href="{{ route('visi-misi.detail') }}" style="color: white;">Visi Misi</a></li>
+                      <li><a href="{{ route('tri-krama.detail') }}" style="color: white;">Tri Krama Adhyaksa</a></li>
                       <li><a href="{{ route('struktur-organisasi.detail') }}" style="color: white;">Struktur Organisasi</a></li>
-                      <li><a href="#" style="color: white;">Tri Krama Adhyaksa</a></li>
                     </ul> 
                   </li>
                   <li class="dropdown">
@@ -162,7 +287,7 @@
                     </ul> 
                   </li>
                   <li>
-                    <a class="page-scroll" href="#blog" style="color: white;">Berita</a>
+                    <a class="page-scroll" href="{{ route('news.all') }}" style="color: white;">Berita</a>
                   </li>
                   <li>
                     <a class="page-scroll" href="#survey" style="color: white;">Survey</a>
@@ -303,7 +428,7 @@
                     {!! Str::limit(strip_tags($about->content), 500) !!}
                   </div>
                   <div class="text-center">
-                    <a href="{{ route('about.detail') }}" class="btn btn-success">
+                    <a href="{{ route('about.detail') }}" class="ready-btn" style="color: white;">
                       Baca Selengkapnya
                       <i class="fa fa-arrow-right ms-2"></i>
                     </a>
@@ -325,110 +450,52 @@
   <div id="blog" class="blog-area">
     <div class="blog-inner area-padding">
       <div class="blog-overly"></div>
-      <div class="container ">
+      <div class="container">
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline text-center">
-              <h2>Latest News</h2>
+              <h2>Berita Terbaru</h2>
             </div>
           </div>
         </div>
         <div class="row">
-          <!-- Start Left Blog -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="single-blog">
-              <div class="single-blog-img">
-                <a href="blog.html">
-										<img src="img/blog/1.jpg" alt="">
-									</a>
+          @if(isset($latestNews) && count($latestNews) > 0)
+            @foreach($latestNews as $news)
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="single-blog">
+                  <div class="single-blog-img">
+                    <img src="{{ asset('storage/' . $news->thumbnail) }}" 
+                         alt="{{ $news->title }}"
+                         style="width: 100%; height: 200px; object-fit: cover;">
+                  </div>
+                  <div class="blog-meta">
+                    <span class="date-type">
+                      <i class="fa fa-calendar"></i>
+                      {{ $news->created_at->format('d M, Y') }}
+                    </span>
+                  </div>
+                  <div class="blog-text">
+                    <h4>
+                      <a href="{{ route('news.show', $news->id) }}">{{ $news->title }}</a>
+                    </h4>
+                    <p>{{ Str::limit($news->short_description, 100) }}</p>
+                  </div>
+                  <span>
+                    <a href="{{ route('news.show', $news->id) }}" class="ready-btn">Baca Selengkapnya</a>
+                  </span>
+                </div>
               </div>
-              <div class="blog-meta">
-                <span class="comments-type">
-										<i class="fa fa-comment-o"></i>
-										<a href="#">13 comments</a>
-									</span>
-                <span class="date-type">
-										<i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-									</span>
-              </div>
-              <div class="blog-text">
-                <h4>
-                                        <a href="blog.html">Assumenda repud eum veniam</a>
-									</h4>
-                <p>
-                  Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                </p>
-              </div>
-              <span>
-									<a href="blog.html" class="ready-btn">Read more</a>
-								</span>
+            @endforeach
+          @else
+            <div class="col-12 text-center">
+              <p>Belum ada berita terbaru.</p>
             </div>
-            <!-- Start single blog -->
+          @endif
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <a href="{{ route('news.all') }}" class="ready-btn">Lihat Semua Berita</a>
           </div>
-          <!-- End Left Blog-->
-          <!-- Start Left Blog -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="single-blog">
-              <div class="single-blog-img">
-                <a href="blog.html">
-										<img src="img/blog/2.jpg" alt="">
-									</a>
-              </div>
-              <div class="blog-meta">
-                <span class="comments-type">
-										<i class="fa fa-comment-o"></i>
-										<a href="#">130 comments</a>
-									</span>
-                <span class="date-type">
-										<i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-									</span>
-              </div>
-              <div class="blog-text">
-                <h4>
-                                        <a href="blog.html">Explicabo magnam quibusdam.</a>
-									</h4>
-                <p>
-                  Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                </p>
-              </div>
-              <span>
-									<a href="blog.html" class="ready-btn">Read more</a>
-								</span>
-            </div>
-            <!-- Start single blog -->
-          </div>
-          <!-- End Left Blog-->
-          <!-- Start Right Blog-->
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="single-blog">
-              <div class="single-blog-img">
-                <a href="blog.html">
-										<img src="img/blog/3.jpg" alt="">
-									</a>
-              </div>
-              <div class="blog-meta">
-                <span class="comments-type">
-										<i class="fa fa-comment-o"></i>
-										<a href="#">10 comments</a>
-									</span>
-                <span class="date-type">
-										<i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-									</span>
-              </div>
-              <div class="blog-text">
-                <h4>
-                                        <a href="blog.html">Lorem ipsum dolor sit amet</a>
-									</h4>
-                <p>
-                  Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                </p>
-              </div>
-              <span>
-									<a href="blog.html" class="ready-btn">Read more</a>
-								</span>
-            </div>
-          </div>
-          <!-- End Right Blog-->
         </div>
       </div>
     </div>
