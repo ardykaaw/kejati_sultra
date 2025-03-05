@@ -10,8 +10,8 @@ class StrukturOrganisasiController extends Controller
 {
     public function index()
     {
-        $strukturOrganisasi = StrukturOrganisasi::first();
-        return view('profil.struktur-organisasi.index', compact('strukturOrganisasi'));
+        $strukturs = StrukturOrganisasi::orderBy('urutan')->get();
+        return view('profil.struktur-organisasi.index', compact('strukturs'));
     }
 
     public function create()
@@ -22,18 +22,25 @@ class StrukturOrganisasiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'nama' => 'required',
+            'jabatan' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'urutan' => 'required|numeric',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedin' => 'nullable|url'
         ]);
 
         $data = $request->all();
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('struktur-organisasi', 'public');
-            $data['image'] = $imagePath;
+
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('struktur-organisasi', 'public');
+            $data['foto'] = $fotoPath;
         }
 
         StrukturOrganisasi::create($data);
-        return redirect()->route('struktur-organisasi.index')->with('success', 'Konten berhasil ditambahkan');
+        return redirect()->route('struktur-organisasi.index')->with('success', 'Anggota berhasil ditambahkan');
     }
 
     public function edit(StrukturOrganisasi $strukturOrganisasi)
@@ -44,21 +51,44 @@ class StrukturOrganisasiController extends Controller
     public function update(Request $request, StrukturOrganisasi $strukturOrganisasi)
     {
         $request->validate([
-            'content' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'nama' => 'required',
+            'jabatan' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'urutan' => 'required|numeric',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedin' => 'nullable|url'
         ]);
 
         $data = $request->all();
-        if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($strukturOrganisasi->image) {
-                Storage::disk('public')->delete($strukturOrganisasi->image);
+
+        if ($request->hasFile('foto')) {
+            if ($strukturOrganisasi->foto) {
+                Storage::disk('public')->delete($strukturOrganisasi->foto);
             }
-            $imagePath = $request->file('image')->store('struktur-organisasi', 'public');
-            $data['image'] = $imagePath;
+            $fotoPath = $request->file('foto')->store('struktur-organisasi', 'public');
+            $data['foto'] = $fotoPath;
         }
 
         $strukturOrganisasi->update($data);
-        return redirect()->route('struktur-organisasi.index')->with('success', 'Konten berhasil diperbarui');
+        return redirect()->route('struktur-organisasi.index')->with('success', 'Data berhasil diperbarui');
+    }
+
+    public function destroy(StrukturOrganisasi $strukturOrganisasi)
+    {
+        if ($strukturOrganisasi->foto) {
+            Storage::disk('public')->delete($strukturOrganisasi->foto);
+        }
+        
+        $strukturOrganisasi->delete();
+        return redirect()->route('struktur-organisasi.index')
+            ->with('success', 'Anggota berhasil dihapus');
+    }
+
+    public function detail()
+    {
+        $strukturs = StrukturOrganisasi::orderBy('urutan')->get();
+        return view('profil.struktur-organisasi.detail', compact('strukturs'));
     }
 } 

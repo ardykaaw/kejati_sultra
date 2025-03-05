@@ -29,7 +29,14 @@
                         <div class="card-body">
                             <div class="content-text">
                                 @if(isset($about))
-                                    {!! $about->content !!}
+                                    <div class="about-content">
+                                        {!! $about->content !!}
+                                        <div class="mt-3">
+                                            <a href="{{ route('about.edit', $about->id) }}" class="btn btn-warning">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                        </div>
+                                    </div>
                                 @else
                                     <div class="text-center py-5">
                                         <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>

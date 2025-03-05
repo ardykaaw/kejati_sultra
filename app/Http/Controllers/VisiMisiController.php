@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\VisiMisi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VisiMisiController extends Controller
 {
@@ -21,10 +22,22 @@ class VisiMisiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'content' => 'required'
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        VisiMisi::create($request->all());
+        $data = [
+            'content' => $request->content
+        ];
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('visi-misi', 'public');
+            $data['image'] = $imagePath;
+            
+            \Log::info('Image path: ' . $imagePath);
+        }
+
+        VisiMisi::create($data);
         return redirect()->route('visi-misi.index')->with('success', 'Konten berhasil ditambahkan');
     }
 
@@ -36,10 +49,24 @@ class VisiMisiController extends Controller
     public function update(Request $request, VisiMisi $visiMisi)
     {
         $request->validate([
-            'content' => 'required'
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $visiMisi->update($request->all());
+        $data = [
+            'content' => $request->content
+        ];
+
+        if ($request->hasFile('image')) {
+            if ($visiMisi->image && Storage::disk('public')->exists($visiMisi->image)) {
+                Storage::disk('public')->delete($visiMisi->image);
+            }
+            
+            $imagePath = $request->file('image')->store('visi-misi', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        $visiMisi->update($data);
         return redirect()->route('visi-misi.index')->with('success', 'Konten berhasil diperbarui');
     }
 } 

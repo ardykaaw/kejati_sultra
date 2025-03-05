@@ -9,5 +9,10 @@ class VisiMisi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['content'];
+    protected $table = 'visi_misi';
+    
+    protected $fillable = [
+        'content',
+        'image'
+    ];
 } 

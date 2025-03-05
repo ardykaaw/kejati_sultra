@@ -22,26 +22,36 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Visi & Misi</h5>
-                            <a href="{{ route('visi-misi.create') }}" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Tambah
-                            </a>
+                            @if(!isset($visiMisi))
+                                <a href="{{ route('visi-misi.create') }}" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </a>
+                            @else
+                                <a href="{{ route('visi-misi.edit', $visiMisi->id) }}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                            @endif
                         </div>
                         <div class="card-body">
                             <div class="content-text">
                                 @if(isset($visiMisi))
                                     <div class="visi-misi-content">
+                                        @if($visiMisi->image)
+                                            <div class="text-center mb-4">
+                                                <img src="{{ asset('storage/' . $visiMisi->image) }}" 
+                                                     alt="Visi Misi Image" 
+                                                     class="img-fluid rounded" 
+                                                     style="max-height: 300px; object-fit: cover;">
+                                                
+                                                <!-- Debug: tampilkan path gambar -->
+                                                <small class="d-none">Image path: {{ $visiMisi->image }}</small>
+                                            </div>
+                                        @endif
                                         <div class="visi-section mb-5">
                                             <div class="section-icon text-center mb-3">
                                                 <i class="fas fa-eye fa-2x text-success"></i>
                                             </div>
-                                            <h2 class="text-center mb-4">Visi</h2>
-                                            {!! $visiMisi->content !!}
-                                        </div>
-                                        <div class="misi-section">
-                                            <div class="section-icon text-center mb-3">
-                                                <i class="fas fa-bullseye fa-2x text-success"></i>
-                                            </div>
-                                            <h2 class="text-center mb-4">Misi</h2>
+                                            <h2 class="text-center mb-4">Visi & Misi</h2>
                                             {!! $visiMisi->content !!}
                                         </div>
                                     </div>
@@ -63,6 +73,30 @@
 
 @push('styles')
 <style>
+    /* Style untuk layout utama */
+    .wrapper {
+        min-height: 100vh;
+    }
+
+    /* Style untuk sidebar */
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 999;
+        min-width: 250px;
+        max-width: 250px;
+    }
+
+    /* Style untuk content wrapper */
+    .content-wrapper {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        min-height: 100vh;
+        padding: 20px;
+    }
+
     .btn-primary {
         background-color: #006400;
         border-color: #006400;

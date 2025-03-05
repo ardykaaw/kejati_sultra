@@ -6,6 +6,7 @@
         padding: 20px;
         min-height: 100vh;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        position: relative;
     }
 
     .sidebar-header {
@@ -128,11 +129,16 @@
 
     /* Styling untuk user profile */
     .user-profile {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 250px;
+        background: #ffffff;
         display: flex;
         align-items: center;
-        padding: 15px;
+        padding: 15px 20px;
         border-top: 1px solid #e9ecef;
-        margin-top: auto;
+        z-index: 1000;
     }
 
     .user-avatar {
@@ -192,9 +198,14 @@
     .nav-link.active i.fa-caret-down {
         transform: rotate(180deg);
     }
+
+    /* Tambahkan padding bottom pada nav-menu */
+    .nav-menu {
+        padding-bottom: 80px;
+    }
 </style>
 
-<div class="sidebar">
+<nav id="sidebar" class="sidebar">
     <div class="sidebar-header">
         <div class="header-logo">
             <img src="{{ asset('img/logo/kejaksaanri.png') }}" alt="Logo" class="sidebar-logo">
@@ -277,26 +288,9 @@
                 </a>
             </div>
         </div>
-
-        <div class="menu-section">
-            <div class="menu-title">Manajemen</div>
-            <div class="nav flex-column">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-users"></i>
-                    Pegawai
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-chart-bar"></i>
-                    Laporan
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-cog"></i>
-                    Pengaturan
-                </a>
-            </div>
-        </div>
     </div>
 
+    <!-- User Profile di bagian bawah -->
     <div class="user-profile">
         <div class="user-avatar">
             <i class="fas fa-user"></i>
@@ -312,7 +306,7 @@
             </button>
         </form>
     </div>
-</div>
+</nav>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
