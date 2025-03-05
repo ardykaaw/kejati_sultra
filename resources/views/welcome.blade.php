@@ -34,7 +34,7 @@
   <!-- Responsive Stylesheet File -->
   <link href="css/responsive.css" rel="stylesheet">
 
-  <!-- Internal CSS untuk animasi logo -->
+  <!-- Combined Styles -->
   <style>
     .slider-content {
       text-align: center;
@@ -66,6 +66,23 @@
         transform: translateY(0);
         opacity: 1;
       }
+    }
+
+    /* Custom Dropdown Styles */
+    .dropdown-menu {
+      background-color: #ffffff; /* Background color for the dropdown */
+      border: 1px solid #ccc; /* Optional: Add a border */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+    }
+
+    .dropdown-menu a {
+      color: #333; /* Text color for dropdown items */
+      padding: 10px 15px; /* Add padding for better spacing */
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #007bff; /* Change to a blue background on hover */
+      color: #ffffff; /* Change text color to white on hover */
     }
 
     /* Pastikan logo tetap di tengah */
@@ -120,34 +137,38 @@
               <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbar-example">
                 <ul class="nav navbar-nav navbar-right" style="color: white;">
                   <li class="active">
-                    <a class="page-scroll" href="#home" style="color: white;">Home</a>
+                    <a class="page-scroll" href="#home" style="color: white;">Beranda</a>
                   </li>
-                  <li>
-                    <a class="page-scroll" href="#about" style="color: white;">About</a>
-                  </li>
-                  <li>
-                    <a class="page-scroll" href="#services" style="color: white;">Services</a>
-                  </li>
-                  <li>
-                    <a class="page-scroll" href="#team" style="color: white;">Team</a>
-                  </li>
-                  <li>
-                    <a class="page-scroll" href="#portfolio" style="color: white;">Portfolio</a>
-                  </li>
-
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">Drop Down<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">Profil <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#" style="color: #333;">Drop Down 1</a></li>
-                      <li><a href="#" style="color: #333;">Drop Down 2</a></li>
+                      <li><a href="#" style="color: white;">Tentang Kamu</a></li>
+                      <li><a href="#" style="color: white;">Visi Misi</a></li>
+                      <li><a href="#" style="color: white;">Struktur Organisasi</a></li>
+                      <li><a href="#" style="color: white;">Tri Krama Adhyaksa</a></li>
                     </ul> 
                   </li>
-
-                  <li>
-                    <a class="page-scroll" href="#blog" style="color: white;">Blog</a>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">Layanan <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#" style="color: white;">Cek Perkara</a></li>
+                      <li><a href="#" style="color: white;">Buku Tamu</a></li>
+                      <li><a href="#" style="color: white;">E-Tilang</a></li>
+                      <li><a href="#" style="color: white;">JDIH</a></li>
+                      <li><a href="#" style="color: white;">E-Prawas</a></li>
+                      <li><a href="#" style="color: white;">E-PPID</a></li>
+                      <li><a href="#" style="color: white;">Reformasi Birokrasi</a></li>
+                      <li><a href="#" style="color: white;">Sarana</a></li>
+                    </ul> 
                   </li>
                   <li>
-                    <a class="page-scroll" href="#contact" style="color: white;">Contact</a>
+                    <a class="page-scroll" href="#blog" style="color: white;">Berita</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#survey" style="color: white;">Survey</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#contact" style="color: white;">Kontak</a>
                   </li>
                 </ul>
               </div>

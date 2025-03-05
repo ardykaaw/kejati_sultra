@@ -307,72 +307,8 @@
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <div class="header-logo">
-                <img src="{{ asset('img/logo/kejaksaanri.png') }}" alt="Logo" class="sidebar-logo">
-                <div class="logo-text">
-                    <h1 class="logo-title">KEJAKSAAN TINGGI</h1>
-                    <p class="logo-subtitle">SULAWESI TENGGARA</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="nav-menu">
-            <div class="menu-section">
-                <div class="menu-title">Menu Utama</div>
-                <div class="nav flex-column">
-                    <a href="#" class="nav-link active">
-                        <i class="fas fa-home"></i>
-                        Dashboard
-                    </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-file-alt"></i>
-                        Dokumen
-                    </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-calendar"></i>
-                        Jadwal
-                    </a>
-                </div>
-            </div>
-
-            <div class="menu-section">
-                <div class="menu-title">Manajemen</div>
-                <div class="nav flex-column">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-users"></i>
-                        Pegawai
-                    </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-chart-bar"></i>
-                        Laporan
-                    </a>
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-cog"></i>
-                        Pengaturan
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="user-profile">
-            <div class="user-avatar">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="user-info">
-                <h6 class="user-name">{{ auth()->user()->name }}</h6>
-                <div class="user-role">Administrator</div>
-            </div>
-            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                @csrf
-                <button type="submit" class="logout-btn" title="Logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
+    @include('components.sidebar')
+    
     <!-- Main Content -->
     <div class="main-content">
         <div class="page-header">
