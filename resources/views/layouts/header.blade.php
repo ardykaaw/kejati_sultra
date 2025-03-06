@@ -57,6 +57,9 @@
                                     <a href="#survey" style="color: white;">Survey</a>
                                 </li>
                                 <li>
+                                    <a href="{{ route('gallery.show') }}" style="color: white;">Galeri</a>
+                                </li>
+                                <li>
                                     <a href="#contact" style="color: white;">Kontak</a>
                                 </li>
                             </ul>

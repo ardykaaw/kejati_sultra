@@ -281,10 +281,10 @@
                     Berita
                 </a>
 
-                <!-- Menu Survey -->
-                <a href="#" class="nav-link">
-                    <i class="fas fa-poll"></i>
-                    Survey
+                <!-- Menu Galeri -->
+                <a href="{{ route('gallery.index') }}" class="nav-link {{ request()->routeIs('gallery.*') ? 'active' : '' }}">
+                    <i class="fas fa-images"></i>
+                    Galeri
                 </a>
             </div>
         </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\ReformasiBirokrasiController;
 use App\Http\Controllers\SaranaController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\GalleryController;
 
 // Route untuk publik (tidak perlu auth)
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
@@ -50,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Tri Krama Routes
         Route::resource('tri-krama', TriKramaController::class);
+
+        // Gallery Routes
+        Route::resource('gallery', GalleryController::class)->except(['show']);
     });
 
     // Routes untuk Layanan
@@ -68,3 +72,6 @@ Route::get('/tri-krama', [TriKramaController::class, 'detail'])->name('tri-krama
 // Tambahkan route berikut
 Route::get('/berita', [NewsController::class, 'allNews'])->name('news.all');
 Route::get('/berita/{id}', [NewsController::class, 'show'])->name('news.show');
+
+// Di luar grup auth (untuk publik)
+Route::get('/galeri', [GalleryController::class, 'show'])->name('gallery.show');
