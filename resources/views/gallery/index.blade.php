@@ -6,7 +6,8 @@
     
     <div class="news-content-wrapper">
         <div class="news-content-container">
-            <div class="news-content-box">
+            <!-- Gallery Section -->
+            <div class="news-content-box mb-4">
                 <div class="news-header-wrapper">
                     <h1 class="news-content-title">Kelola Galeri</h1>
                     <a href="{{ route('gallery.create') }}" class="news-btn-add">
@@ -37,7 +38,6 @@
                                             title="Hapus">
                                         <i class="fas fa-trash"></i>
                                     </button>
-
                                     <form id="delete-form-{{ $gallery->id }}" 
                                           action="{{ route('gallery.destroy', $gallery->id) }}" 
                                           method="POST" 
@@ -53,6 +53,104 @@
                     @endforelse
                 </div>
             </div>
+
+            <!-- Video Section -->
+            <div class="news-content-box">
+                <div class="news-header-wrapper">
+                    <h1 class="news-content-title">Kelola Video</h1>
+                    <button class="news-btn-add" data-bs-toggle="modal" data-bs-target="#addVideoModal">
+                        <i class="fas fa-plus"></i>
+                        Tambah Video
+                    </button>
+                </div>
+
+                <div class="video-table-wrapper">
+                    <table class="video-table">
+                        <thead>
+                            <tr>
+                                <th>Thumbnail</th>
+                                <th>Judul Video</th>
+                                <th>URL YouTube</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($videos as $video)
+                                <tr>
+                                    <td class="video-thumbnail-cell">
+                                        <div class="video-thumbnail-wrapper">
+                                            <img src="https://img.youtube.com/vi/{{ $video->youtube_id }}/mqdefault.jpg" 
+                                                 alt="{{ $video->title }}"
+                                                 onerror="this.src='https://img.youtube.com/vi/{{ $video->youtube_id }}/0.jpg'">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h3 class="video-title">{{ $video->title ?: 'Untitled Video' }}</h3>
+                                    </td>
+                                    <td>
+                                        <a href="{{ $video->youtube_url }}" target="_blank" class="text-primary">
+                                            Lihat Video
+                                            <i class="fas fa-external-link-alt ms-1"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="video-actions">
+                                            <button class="video-btn-delete" 
+                                                    onclick="confirmDeleteVideo({{ $video->id }})">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <form id="delete-video-form-{{ $video->id }}" 
+                                                  action="{{ route('gallery.destroyVideo', $video->id) }}" 
+                                                  method="POST" 
+                                                  style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">
+                                        <div class="no-data">Belum ada video</div>
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Video Modal -->
+<div class="modal fade" id="addVideoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Video</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('gallery.storeVideo') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">URL YouTube</label>
+                        <input type="url" class="form-control @error('youtube_url') is-invalid @enderror" 
+                               name="youtube_url" required value="{{ old('youtube_url') }}"
+                               placeholder="https://www.youtube.com/watch?v=...">
+                        @error('youtube_url')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <small class="text-muted">Masukkan URL video YouTube</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -63,11 +161,22 @@
         min-height: 100vh;
         background: #f5f7fb;
         width: 100%;
+        position: relative;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: 100;
     }
 
     .news-content-wrapper {
         flex: 1;
         padding: 20px;
+        margin-left: 250px;
     }
 
     .news-content-container {
@@ -240,6 +349,95 @@
             grid-template-columns: 1fr;
         }
     }
+
+    /* Tambahkan style untuk tabel video */
+    .video-table-wrapper {
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    .video-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .video-table th,
+    .video-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .video-table th {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .video-table td {
+        vertical-align: middle;
+    }
+
+    .video-thumbnail-cell {
+        width: 200px;
+    }
+
+    .video-thumbnail-wrapper {
+        position: relative;
+        width: 180px;
+        height: 100px;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .video-thumbnail-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .video-title {
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .video-description {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .video-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .video-btn-edit,
+    .video-btn-delete {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .video-btn-edit {
+        background: #ffc107;
+        color: #000;
+    }
+
+    .video-btn-delete {
+        background: #dc3545;
+        color: white;
+    }
+
+    .video-btn-edit:hover,
+    .video-btn-delete:hover {
+        transform: translateY(-2px);
+    }
 </style>
 
 @push('scripts')
@@ -259,6 +457,23 @@ function confirmDelete(galleryId) {
     }).then((result) => {
         if (result.isConfirmed) {
             document.getElementById('delete-form-' + galleryId).submit();
+        }
+    });
+}
+
+function confirmDeleteVideo(videoId) {
+    Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Video akan dihapus secara permanen!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-video-form-' + videoId).submit();
         }
     });
 }

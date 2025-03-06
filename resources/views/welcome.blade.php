@@ -180,24 +180,29 @@
 
     .section-headline {
       margin-bottom: 50px;
+      text-align: center;
+      position: relative;
     }
 
     .section-headline h2 {
-      color: #333;
       font-size: 32px;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
       position: relative;
-      padding-bottom: 15px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
     }
 
-    .section-headline h2::after {
+    .section-headline h2:after {
       content: '';
       position: absolute;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
+      width: 80px;
       height: 3px;
-      background: #006400;
+      background: #006838;
     }
 
     .about-area {
@@ -217,6 +222,778 @@
       font-size: 15px;
       line-height: 1.8;
       color: #666
+    }
+
+    .single-video {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .single-video:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .video-thumbnail {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      overflow: hidden;
+    }
+
+    .video-thumbnail img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(0,104,56,0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .video-thumbnail:hover .video-play-btn {
+      opacity: 1;
+    }
+
+    .video-play-btn:hover {
+      background: #006838;
+      transform: translate(-50%, -50%) scale(1.1);
+      color: white;
+    }
+
+    .video-text {
+      padding: 20px;
+    }
+
+    .video-text h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .video-text p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .modal-content {
+      background-color: #000;
+      border: none;
+    }
+
+    .modal-header {
+      border-bottom: none;
+      padding: 15px;
+      background: rgba(0,0,0,0.8);
+    }
+
+    .modal-header .close {
+      color: white;
+      opacity: 1;
+      text-shadow: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .modal-title {
+      color: white;
+      font-size: 18px;
+    }
+
+    .modal-body {
+      position: relative;
+      padding: 0 !important;
+    }
+
+    .embed-responsive {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .embed-responsive::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%;
+    }
+
+    .embed-responsive iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(0,104,56,0.8);
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .video-thumbnail:hover .video-play-btn {
+      opacity: 1;
+    }
+
+    .video-play-btn:hover {
+      background: #006838;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .video-area {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+
+    .section-headline h2 {
+      position: relative;
+      margin-bottom: 40px;
+      padding-bottom: 15px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .section-headline h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: #006838;
+    }
+
+    .video-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-info {
+      padding: 20px;
+    }
+
+    .video-info h4 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .video-info p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .video-card {
+        margin-bottom: 15px;
+      }
+      
+      .video-info {
+        padding: 15px;
+      }
+      
+      .video-info h4 {
+        font-size: 16px;
+      }
+    }
+
+    /* Tambahkan CSS untuk mengatur tampilan video */
+    .video-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .video-item {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 180px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Responsif untuk layar kecil */
+    @media (max-width: 768px) {
+      .video-container {
+        height: 150px;
+      }
+    }
+
+    /* Styling untuk section berita */
+    .blog-area {
+      padding: 60px 0;
+      background: #f9f9f9;
+    }
+
+    .section-headline h2 {
+      font-size: 24px;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #006838;
+      display: inline-block;
+    }
+
+    .single-blog {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .single-blog-img {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-meta {
+      padding: 10px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .date-type {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .blog-text {
+      padding: 15px;
+      flex-grow: 1;
+    }
+
+    .blog-text h4 {
+      font-size: 16px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .blog-text h4 a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .blog-text h4 a:hover {
+      color: #006838;
+    }
+
+    .blog-text p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .blog-button {
+      padding: 0 15px 15px;
+    }
+
+    .ready-btn {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #006838;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 13px;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .ready-btn:hover {
+      background: #005229;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Styling untuk section video */
+    .video-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .video-item {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 768px) {
+      .col-md-4 {
+        margin-bottom: 20px;
+      }
+      
+      .video-container {
+        margin-bottom: 15px;
+      }
+      
+      .section-headline h2 {
+        font-size: 20px;
+      }
+    }
+
+    /* Reset section headline styling */
+    .section-headline {
+      margin-bottom: 30px;
+    }
+
+    .section-headline h2 {
+      font-size: 24px;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    .section-headline h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #006838;
+    }
+
+    /* Video sidebar styling */
+    .video-sidebar {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 300px;
+      padding-left: 20px;
+    }
+
+    .video-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .video-item {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Blog styling */
+    .blog-area {
+      padding: 60px 0;
+      background: #f9f9f9;
+      position: relative;
+    }
+
+    .single-blog {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .blog-meta {
+      padding: 10px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .blog-text {
+      padding: 15px;
+      flex-grow: 1;
+    }
+
+    .blog-button {
+      padding: 0 15px 15px;
+    }
+
+    .ready-btn {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #006838;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 13px;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .ready-btn:hover {
+      background: #005229;
+      color: #fff;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 1200px) {
+      .video-sidebar {
+        position: relative;
+        width: 100%;
+        padding-left: 0;
+        margin-top: 30px;
+      }
+      
+      .col-md-8.col-md-offset-2 {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+
+    /* Video section styling */
+    .video-section {
+      padding-right: 0;
+      margin-right: -15px;
+    }
+
+    .video-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .video-item {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 65%;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Container styling */
+    .container-fluid {
+      padding-right: 0;
+      padding-left: 30px;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    /* Section headline styling */
+    .section-headline {
+      margin-bottom: 50px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-headline h2 {
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px; /* Tambah padding bawah */
+    }
+
+    /* Garis bawah untuk judul */
+    .section-headline h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px; /* Lebar garis */
+      height: 3px; /* Ketebalan garis */
+      background: #006838; /* Warna hijau */
+    }
+
+    /* Hapus semua style section-headline lainnya yang mungkin konflik */
+    .section-headline,
+    .section-headline h2,
+    .section-headline:after {
+      border: none;
+      margin: 0;
+    }
+
+    .section-headline h2 {
+      margin-bottom: 0;
+    }
+
+    /* Blog area styling */
+    .blog-area {
+      padding: 60px 0;
+      background: #f9f9f9;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 1200px) {
+      .col-md-7.col-md-offset-1 {
+        margin-left: 0;
+        width: 100%;
+      }
+      
+      .video-section {
+        width: 100%;
+        padding-right: 15px;
+        margin-right: 0;
+        margin-top: 30px;
+      }
+      
+      .container-fluid {
+        padding-right: 15px;
+      }
+      
+      .video-container {
+        padding-top: 56.25%;
+      }
+    }
+
+    /* Ganti class section-headline menjadi news-headline untuk menghindari konflik */
+    .news-headline {
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .news-headline h2 {
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
+    }
+
+    .news-headline:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: #000;
+      margin-top: 15px;
+    }
+
+    /* Reset semua style yang mungkin menyebabkan garis tambahan */
+    .section-headline,
+    .section-headline h2,
+    .section-headline:after,
+    .section-headline h2:after {
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Container dan section styling */
+    .container-fluid {
+      padding-right: 0;
+      padding-left: 30px;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    .video-section {
+      padding-right: 0;
+      margin-right: -15px;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 1200px) {
+      .video-section {
+        width: 100%;
+        padding-right: 15px;
+        margin-right: 0;
+        margin-top: 30px;
+      }
+    }
+
+    /* Style baru untuk news-title (Berita dan Video) */
+    .news-title {
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .news-title h2 {
+      font-size: 32px;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .news-title h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: #006838;
+    }
+
+    /* Style khusus untuk section Tentang Kami */
+    #about .section-headline {
+      margin-bottom: 50px;
+      text-align: center;
+      position: relative;
+    }
+
+    #about .section-headline h2 {
+      font-size: 32px;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border: none;
+    }
+
+    #about .section-headline h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: #006838;
+      display: block;
+    }
+
+    /* Hapus atau comment style yang konflik */
+    /* Reset semua style section-headline lainnya yang mungkin konflik */
+    .section-headline,
+    .section-headline h2,
+    .section-headline:after,
+    .section-headline h2:after {
+      border: none;
     }
   </style>
 
@@ -401,7 +1178,7 @@
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="section-headline text-center">
-            <h2>Tentang Kami</h2>
+            <h2>TENTANG KAMI</h2>
           </div>
         </div>
       </div>
@@ -452,58 +1229,98 @@
   <!-- Start Blog Area -->
   <div id="blog" class="blog-area">
     <div class="blog-inner area-padding">
-      <div class="blog-overly"></div>
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline text-center">
-              <h2>Berita Terbaru</h2>
+          <!-- Kolom Berita -->
+          <div class="col-md-7 col-md-offset-1">
+            <div class="news-title">
+              <h2>BERITA TERBARU</h2>
+            </div>
+            <div class="row">
+              @if(isset($latestNews) && count($latestNews) > 0)
+                @foreach($latestNews->take(3) as $news)
+                  <div class="col-md-4">
+                    <div class="single-blog">
+                      <div class="single-blog-img">
+                        <img src="{{ asset('storage/' . $news->thumbnail) }}" 
+                             alt="{{ $news->title }}"
+                             style="width: 100%; height: 180px; object-fit: cover;">
+                      </div>
+                      <div class="blog-meta">
+                        <span class="date-type">
+                          <i class="fa fa-calendar"></i>
+                          {{ $news->created_at->format('d M, Y') }}
+                        </span>
+                      </div>
+                      <div class="blog-text">
+                        <h4>
+                          <a href="{{ route('news.show', $news->id) }}">{{ Str::limit($news->title, 50) }}</a>
+                        </h4>
+                        <p>{{ Str::limit($news->short_description, 80) }}</p>
+                      </div>
+                      <div class="blog-button">
+                        <a href="{{ route('news.show', $news->id) }}" class="ready-btn">Baca Selengkapnya</a>
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+              @else
+                <div class="col-12 text-center">
+                  <p>Belum ada berita terbaru.</p>
+                </div>
+              @endif
             </div>
           </div>
-        </div>
-        <div class="row">
-          @if(isset($latestNews) && count($latestNews) > 0)
-            @foreach($latestNews as $news)
-              <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="single-blog">
-                  <div class="single-blog-img">
-                    <img src="{{ asset('storage/' . $news->thumbnail) }}" 
-                         alt="{{ $news->title }}"
-                         style="width: 100%; height: 200px; object-fit: cover;">
-                  </div>
-                  <div class="blog-meta">
-                    <span class="date-type">
-                      <i class="fa fa-calendar"></i>
-                      {{ $news->created_at->format('d M, Y') }}
-                    </span>
-                  </div>
-                  <div class="blog-text">
-                    <h4>
-                      <a href="{{ route('news.show', $news->id) }}">{{ $news->title }}</a>
-                    </h4>
-                    <p>{{ Str::limit($news->short_description, 100) }}</p>
-                  </div>
-                  <span>
-                    <a href="{{ route('news.show', $news->id) }}" class="ready-btn">Baca Selengkapnya</a>
-                  </span>
-                </div>
-              </div>
-            @endforeach
-          @else
-            <div class="col-12 text-center">
-              <p>Belum ada berita terbaru.</p>
+
+          <!-- Kolom Video -->
+          <div class="col-md-3 video-section">
+            <div class="news-title">
+              <h2>VIDEO</h2>
             </div>
-          @endif
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <a href="{{ route('news.all') }}" class="ready-btn">Lihat Semua Berita</a>
+            <div class="video-stack">
+              @if(isset($videos) && count($videos) > 0)
+                @foreach($videos->take(3) as $video)
+                  <div class="video-item">
+                    <div class="video-container">
+                      <iframe 
+                        src="https://www.youtube.com/embed/{{ $video->youtube_id }}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                  </div>
+                @endforeach
+              @else
+                <p>Belum ada video.</p>
+              @endif
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
   <!-- End Blog -->
+
+  <!-- Video Modal -->
+  <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel">Video Player</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="stopVideo()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <div id="youtube-player"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
   <!-- Start Suscrive Area -->
   <div class="suscribe-area" style="background-color: #004d00;">
     <div class="container">
@@ -714,6 +1531,54 @@
   <script src="/contactform/contactform.js"></script>
 
   <script src="/js/main.js"></script>
+
+  <!-- Tambahkan JavaScript untuk YouTube Player -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+  let player;
+
+  function onYouTubeIframeAPIReady() {
+      // YouTube API is ready
+  }
+
+  function playVideo(videoId) {
+      $('#videoModal').modal('show');
+      
+      if (player) {
+          player.destroy();
+      }
+      
+      player = new YT.Player('youtube-player', {
+          height: '100%',
+          width: '100%',
+          videoId: videoId,
+          playerVars: {
+              'autoplay': 1,
+              'playsinline': 1,
+              'modestbranding': 1,
+              'rel': 0
+          },
+          events: {
+              'onReady': onPlayerReady
+          }
+      });
+  }
+
+  function onPlayerReady(event) {
+      event.target.playVideo();
+  }
+
+  function stopVideo() {
+      if (player) {
+          player.stopVideo();
+      }
+  }
+
+  // Stop video when modal is closed
+  $('#videoModal').on('hidden.bs.modal', function () {
+      stopVideo();
+  });
+  </script>
 </body>
 
 </html>

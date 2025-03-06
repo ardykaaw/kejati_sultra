@@ -75,3 +75,8 @@ Route::get('/berita/{id}', [NewsController::class, 'show'])->name('news.show');
 
 // Di luar grup auth (untuk publik)
 Route::get('/galeri', [GalleryController::class, 'show'])->name('gallery.show');
+
+// Tambahkan routes ini bersama route gallery yang sudah ada
+Route::post('/gallery/video', [GalleryController::class, 'storeVideo'])->name('gallery.storeVideo');
+Route::put('/gallery/video/{id}', [GalleryController::class, 'updateVideo'])->name('gallery.updateVideo');
+Route::delete('/gallery/video/{id}', [GalleryController::class, 'destroyVideo'])->name('gallery.destroyVideo');
