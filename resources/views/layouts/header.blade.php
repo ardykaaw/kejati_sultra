@@ -40,7 +40,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">Layanan <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#" style="color: white;">Cek Perkara</a></li>
+                                        <li><a href="https://cms-publik.kejaksaan.go.id/" style="color: white;">Cek Perkara</a></li>
                                         <li><a href="#" style="color: white;">Buku Tamu</a></li>
                                         <li><a href="#" style="color: white;">E-Tilang</a></li>
                                         <li><a href="#" style="color: white;">JDIH</a></li>

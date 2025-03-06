@@ -81,7 +81,7 @@
                                 <i class="fas fa-tasks"></i>
                             </div>
                             <div class="stats-info">
-                                <div class="stats-value">12</div>
+                                <div class="stats-value">7</div>
                                 <div class="stats-label">Tugas Aktif</div>
                             </div>
                         </div>
