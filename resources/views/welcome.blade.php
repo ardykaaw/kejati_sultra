@@ -1441,7 +1441,7 @@
                   <h2 style="color: white;">Kejaksaan Tinggi Sulawesi Tenggara</h2>
                 </div>
 
-                <p style="color: white;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+                <!-- <p style="color: white;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p> -->
                 <div class="footer-icons">
                   <ul>
                     <li>
@@ -1465,14 +1465,14 @@
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="footer-content">
               <div class="footer-head">
-                <h4 style="color: white;">information</h4>
+                <h4 style="color: white;">Informasi</h4>
                 <p style="color: white;">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                  Hubungi Kami disini, untuk Pengaduan
                 </p>
                 <div class="footer-contacts">
-                  <p style="color: white;"><span>Tel:</span> +123 456 789</p>
+                  <p style="color: white;"><span>call:</span> +123 456 789</p>
                   <p style="color: white;"><span>Email:</span> contact@example.com</p>
-                  <p style="color: white;"><span>Working Hours:</span> 9am-5pm</p>
+                  <p style="color: white;"><span>Jam Kerja:</span> 9am-5pm</p>
                 </div>
               </div>
             </div>
@@ -1481,7 +1481,52 @@
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="footer-content">
               <div class="footer-head">
-                <h4 style="color: white;">Instagram</h4>
+                <h4 style="color: white; font-size: 18px; font-weight: 600; margin-bottom: 20px;">Menu Utama</h4>
+                <div class="footer-links">
+                  <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 10px;">
+                      <a href="/" style="color: white; text-decoration: none; font-size: 14px; transition: all 0.3s ease;">
+                        <i class="fa fa-angle-right" style="margin-right: 8px;"></i>Beranda
+                      </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                      <a href="#" style="color: white; text-decoration: none; font-size: 14px; transition: all 0.3s ease;">
+                        <i class="fa fa-angle-right" style="margin-right: 8px;"></i>Profil
+                      </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                      <a href="#" style="color: white; text-decoration: none; font-size: 14px; transition: all 0.3s ease;">
+                        <i class="fa fa-angle-right" style="margin-right: 8px;"></i>Layanan
+                      </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                      <a href="{{ route('news.all') }}" style="color: white; text-decoration: none; font-size: 14px; transition: all 0.3s ease;">
+                        <i class="fa fa-angle-right" style="margin-right: 8px;"></i>Berita
+                      </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                      <a href="#survey" style="color: white; text-decoration: none; font-size: 14px; transition: all 0.3s ease;">
+                        <i class="fa fa-angle-right" style="margin-right: 8px;"></i>Survey
+                      </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                      <a href="{{ route('gallery.show') }}" style="color: white; text-decoration: none; font-size: 14px; transition: all 0.3s ease;">
+                        <i class="fa fa-angle-right" style="margin-right: 8px;"></i>Galeri
+                      </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                      <a href="#contact" style="color: white; text-decoration: none; font-size: 14px; transition: all 0.3s ease;">
+                        <i class="fa fa-angle-right" style="margin-right: 8px;"></i>Kontak
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- <h4 style="color: white; font-size: 18px; font-weight: 600; margin: 30px 0 20px;">Layanan Online</h4>
+                <div class="footer-links">
+                  <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 10px;">
+                      <a href="https://cms-publik.kejaksaan.go.id/" style="color: white; text-decoration: none; font-size: 14px; transition: all 0.3s ease;"> -->
+                <!-- <h4 style="color: white;">Instagram</h4>
                 <div class="flicker-img">
                   <a href="#"><img src="/img/portfolio/1.jpg" alt=""></a>
                   <a href="#"><img src="/img/portfolio/2.jpg" alt=""></a>
@@ -1489,7 +1534,7 @@
                   <a href="#"><img src="/img/portfolio/4.jpg" alt=""></a>
                   <a href="#"><img src="/img/portfolio/5.jpg" alt=""></a>
                   <a href="#"><img src="/img/portfolio/6.jpg" alt=""></a>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
