@@ -264,10 +264,10 @@
                         <i class="fas fa-caret-down"></i>
                     </a>
                     <div class="submenu">
-                        <a href="{{ route('reformasi-birokrasi.index') }}" class="nav-link">
+                        {{-- <a href="{{ route('reformasi-birokrasi.index') }}" class="nav-link">
                             <i class="fas fa-sync"></i>
                             Reformasi Birokrasi
-                        </a>
+                        </a> --}}
                         <a href="{{ route('sarana.index') }}" class="nav-link">
                             <i class="fas fa-building"></i>
                             Sarana & Prasarana
@@ -286,6 +286,14 @@
                     <i class="fas fa-images"></i>
                     Galeri
                 </a>
+
+                <!-- Menu Aduan Masyarakat -->
+                <li class="nav-item">
+                    <a href="{{ route('complaints.index') }}" class="nav-link {{ Request::is('complaints*') ? 'active' : '' }}">
+                        <i class="fas fa-comments"></i>
+                        <span>Aduan Masyarakat</span>
+                    </a>
+                </li>
             </div>
         </div>
     </div>

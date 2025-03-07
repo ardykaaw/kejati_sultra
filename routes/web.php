@@ -13,6 +13,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ComplaintController;
 
 // Route untuk publik (tidak perlu auth)
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
@@ -67,6 +68,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Routes untuk Berita
     Route::resource('news', NewsController::class);
+
+    // Routes untuk Aduan Masyarakat
+    Route::get('/complaints', [ComplaintController::class, 'index'])->name('complaints.index');
+    Route::put('/complaints/{id}/status', [ComplaintController::class, 'updateStatus'])->name('complaints.updateStatus');
 });
 
 // Route untuk Tri Krama Adhyaksa
@@ -86,3 +91,9 @@ Route::delete('/gallery/video/{id}', [GalleryController::class, 'destroyVideo'])
 
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey.index');
 Route::post('/survey', [SurveyController::class, 'store'])->name('survey.store');
+
+// Route untuk menyimpan aduan dari halaman welcome
+Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
+
+// Di luar grup auth (untuk publik)
+Route::get('/sarana-prasarana', [SaranaController::class, 'detail'])->name('sarana.detail');

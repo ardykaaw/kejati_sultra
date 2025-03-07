@@ -10,8 +10,8 @@ class SaranaController extends Controller
 {
     public function index()
     {
-        $sarana = Sarana::first();
-        return view('layanan.sarana.index', compact('sarana'));
+        $saranas = Sarana::orderBy('created_at', 'desc')->get();
+        return view('layanan.sarana.index', compact('saranas'));
     }
 
     public function create()
@@ -27,14 +27,24 @@ class SaranaController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('sarana', 'public');
-            $data['image'] = $imagePath;
-        }
+        try {
+            $data = $request->all();
+            
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('sarana', 'public');
+                $data['image'] = $imagePath;
+            }
 
-        Sarana::create($data);
-        return redirect()->route('sarana.index')->with('success', 'Data berhasil ditambahkan');
+            // Buat data baru tanpa menghapus data lama
+            Sarana::create($data);
+
+            return redirect()->route('sarana.index')
+                ->with('success', 'Data berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->withInput();
+        }
     }
 
     public function edit(Sarana $sarana)
@@ -61,5 +71,29 @@ class SaranaController extends Controller
 
         $sarana->update($data);
         return redirect()->route('sarana.index')->with('success', 'Data berhasil diperbarui');
+    }
+
+    public function detail()
+    {
+        $saranas = Sarana::orderBy('created_at', 'desc')->get();
+        return view('layanan.sarana.detail', compact('saranas'));
+    }
+
+    public function destroy(Sarana $sarana)
+    {
+        try {
+            // Hapus gambar jika ada
+            if ($sarana->image) {
+                Storage::disk('public')->delete($sarana->image);
+            }
+            
+            $sarana->delete();
+            
+            return redirect()->route('sarana.index')
+                ->with('success', 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan saat menghapus data');
+        }
     }
 } 

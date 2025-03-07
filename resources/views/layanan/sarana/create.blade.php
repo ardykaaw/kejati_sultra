@@ -90,6 +90,7 @@
     $(document).ready(function() {
         $('#content').summernote({
             height: 300,
+            width: '100%',
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
@@ -98,7 +99,16 @@
                 ['table', ['table']],
                 ['insert', ['link']],
                 ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+            ],
+            styleTags: ['p', 'h3', 'h4'],
+            callbacks: {
+                onPaste: function (e) {
+                    // Strip all HTML tags except those we allow
+                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    e.preventDefault();
+                    document.execCommand('insertText', false, bufferText);
+                }
+            }
         });
     });
 </script>

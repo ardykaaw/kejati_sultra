@@ -995,6 +995,14 @@
     .section-headline h2:after {
       border: none;
     }
+
+    .headline-underline {
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #006400, #28a745);
+      margin: 20px auto;
+      border-radius: 2px;
+    }
   </style>
 
   <!-- =======================================================
@@ -1053,14 +1061,13 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">Layanan <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="https://cms-publik.kejaksaan.go.id/" style="color: white;">Cek Perkara</a></li>
-                      <li><a href="#" style="color: white;">Buku Tamu</a></li>
-                      <li><a href="#" style="color: white;">E-Tilang</a></li>
-                      <li><a href="#" style="color: white;">JDIH</a></li>
-                      <li><a href="#" style="color: white;">E-Prawas</a></li>
-                      <li><a href="#" style="color: white;">E-PPID</a></li>
-                      <li><a href="#" style="color: white;">Reformasi Birokrasi</a></li>
-                      <li><a href="#" style="color: white;">Sarana</a></li>
+                      <li><a href="https://cms-publik.kejaksaan.go.id/" target="_blank" style="color: white;">Cek Perkara</a></li>
+                      <li><a href="https://bukutamu.kejaksaan.go.id/" target="_blank" style="color: white;">Buku Tamu</a></li>
+                      <li><a href="https://tilang.kejaksaan.go.id/" target="_blank" style="color: white;">E-Tilang</a></li>
+                      <li><a href="https://jdih.kejaksaan.go.id/" target="_blank" style="color: white;">JDIH</a></li>
+                      <li><a href="https://e-prowas.kejaksaan.go.id/" target="_blank" style="color: white;">E-Prowas</a></li>
+                      <li><a href="https://ppid.kejaksaan.go.id/" target="_blank" style="color: white;">E-PPID</a></li>
+                      <li><a href="{{ route('sarana.detail') }}" style="color: white;">Sarana</a></li>
                     </ul> 
                   </li>
                   <li>
@@ -1235,48 +1242,48 @@
           <div class="col-md-7 col-md-offset-1">
             <div class="news-title">
               <h2>BERITA TERBARU</h2>
-            </div>
-            <div class="row">
+        </div>
+        <div class="row">
               @if(isset($latestNews) && count($latestNews) > 0)
                 @foreach($latestNews->take(3) as $news)
                   <div class="col-md-4">
-                    <div class="single-blog">
-                      <div class="single-blog-img">
+            <div class="single-blog">
+              <div class="single-blog-img">
                         <img src="{{ asset('storage/' . $news->thumbnail) }}" 
                              alt="{{ $news->title }}"
                              style="width: 100%; height: 180px; object-fit: cover;">
-                      </div>
-                      <div class="blog-meta">
-                        <span class="date-type">
+              </div>
+              <div class="blog-meta">
+                <span class="date-type">
                           <i class="fa fa-calendar"></i>
                           {{ $news->created_at->format('d M, Y') }}
-                        </span>
-                      </div>
-                      <div class="blog-text">
-                        <h4>
+									</span>
+              </div>
+              <div class="blog-text">
+                <h4>
                           <a href="{{ route('news.show', $news->id) }}">{{ Str::limit($news->title, 50) }}</a>
-                        </h4>
+									</h4>
                         <p>{{ Str::limit($news->short_description, 80) }}</p>
-                      </div>
+              </div>
                       <div class="blog-button">
                         <a href="{{ route('news.show', $news->id) }}" class="ready-btn">Baca Selengkapnya</a>
-                      </div>
-                    </div>
-                  </div>
+            </div>
+          </div>
+              </div>
                 @endforeach
               @else
                 <div class="col-12 text-center">
                   <p>Belum ada berita terbaru.</p>
-                </div>
+              </div>
               @endif
+              </div>
             </div>
-          </div>
 
           <!-- Kolom Video -->
           <div class="col-md-3 video-section">
             <div class="news-title">
               <h2>VIDEO</h2>
-            </div>
+          </div>
             <div class="video-stack">
               @if(isset($videos) && count($videos) > 0)
                 @foreach($videos->take(3) as $video)
@@ -1288,14 +1295,14 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>
                       </iframe>
-                    </div>
-                  </div>
+              </div>
+              </div>
                 @endforeach
               @else
                 <p>Belum ada video.</p>
               @endif
+              </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -1322,14 +1329,11 @@
   </div>
 
   <!-- Start Suscrive Area -->
-  <div class="suscribe-area" style="background-color: #004d00;">
+  <div class="divider-area">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs=12">
-          <div class="suscribe-text text-center">
-            <h3 style="color: white;">masukkan apa disini</h3>
-            <a class="sus-btn" href="#" style="background-color: #006600; color: white;">dan disini</a>
-          </div>
+        <div class="col-12">
+          <hr class="divider" style="height: 3px; background: linear-gradient(to right, #004d00, #006600, #004d00); border: none; margin: 40px 0;">
         </div>
       </div>
     </div>
@@ -1339,89 +1343,80 @@
   <div id="contact" class="contact-area">
     <div class="contact-inner area-padding">
       <div class="contact-overly"></div>
-      <div class="container ">
+      <div class="container">
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline text-center">
-              <h2>Contact us</h2>
+              <h2>Kontak </h2>
+              <div class="headline-underline"></div>
             </div>
           </div>
         </div>
         <div class="row">
           <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="col-md-4">
             <div class="contact-icon text-center">
               <div class="single-icon">
                 <i class="fa fa-mobile"></i>
                 <p>
-                  Call: +1 5589 55488 55<br>
-                  <span>Monday-Friday (9am-5pm)</span>
+                  Telepon: (0401) 3121429<br>
+                  <span>Senin-Jumat (08.00-16.00)</span>
                 </p>
               </div>
             </div>
           </div>
-          <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="col-md-4">
             <div class="contact-icon text-center">
               <div class="single-icon">
                 <i class="fa fa-envelope-o"></i>
                 <p>
-                  Email: info@example.com<br>
-                  <span>Web: www.example.com</span>
+                  Email: kejati.sultra@kejaksaan.go.id<br>
+                  <span>Web: sultra.kejaksaan.go.id</span>
                 </p>
               </div>
             </div>
           </div>
-          <!-- Start contact icon column -->
-          <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="col-md-4">
             <div class="contact-icon text-center">
               <div class="single-icon">
                 <i class="fa fa-map-marker"></i>
                 <p>
-                  Location:  kendari, Sulawesi Tenggara<br>
-                  <!-- <span>NY 535022, USA</span> -->
+                  Jl. Haluoleo No.27, Kendari<br>
+                  <span>Sulawesi Tenggara 93117</span>
                 </p>
-              </div>
             </div>
           </div>
         </div>
         <div class="row">
-
           <!-- Start Google Map -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <!-- Start Map -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.7692435878915!2d122.5101405!3d-3.9769296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d98f2c731c1ace7%3A0x98d62b3c7af9b08c!2sKejaksaan%20Tinggi%20Sulawesi%20Tenggara!5e0!3m2!1sen!2sid!4v1709648364532" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
-            <!-- End Map -->
-          </div>
-          <!-- End Google Map -->
-
-          <!-- Start  contact -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="col-md-6">
             <div class="form contact-form">
-              <div id="sendmessage">Your message has been sent. Thank you!</div>
-              <div id="errormessage"></div>
-              <form action="" method="post" role="form" class="contactForm">
+              <form action="{{ route('complaints.store') }}" method="POST" class="php-email-form">
+                @csrf
                 <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validation"></div>
+                  <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" required>
                 </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validation"></div>
+                <div class="form-group mt-3">
+                  <input type="email" class="form-control" name="email" placeholder="Email" required>
                 </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                  <div class="validation"></div>
+                <div class="form-group mt-3">
+                  <input type="text" class="form-control" name="phone" placeholder="Nomor Telepon" required>
                 </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                  <div class="validation"></div>
+                <div class="form-group mt-3">
+                  <textarea class="form-control" name="message" rows="5" placeholder="Isi Pengaduan" required></textarea>
                 </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-success">Kirim Aduan</button>
+                </div>
               </form>
             </div>
           </div>
-          <!-- End Left contact -->
+          <!-- End contact Form -->
+          <!-- Start Google Map -->
+          <div class="col-md-6">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.7692435878915!2d122.5101405!3d-3.9769296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d98f2c731c1ace7%3A0x98d62b3c7af9b08c!2sKejaksaan%20Tinggi%20Sulawesi%20Tenggara!5e0!3m2!1sen!2sid!4v1709648364532" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+          </div>
+          <!-- End Google Map -->
         </div>
       </div>
     </div>

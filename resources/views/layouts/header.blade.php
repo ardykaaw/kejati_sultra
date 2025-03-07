@@ -40,14 +40,13 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;">Layanan <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="https://cms-publik.kejaksaan.go.id/" style="color: white;">Cek Perkara</a></li>
-                                        <li><a href="#" style="color: white;">Buku Tamu</a></li>
-                                        <li><a href="#" style="color: white;">E-Tilang</a></li>
-                                        <li><a href="#" style="color: white;">JDIH</a></li>
-                                        <li><a href="#" style="color: white;">E-Prawas</a></li>
-                                        <li><a href="#" style="color: white;">E-PPID</a></li>
-                                        <li><a href="#" style="color: white;">Reformasi Birokrasi</a></li>
-                                        <li><a href="#" style="color: white;">Sarana</a></li>
+                                        <li><a href="https://cms-publik.kejaksaan.go.id/" target="_blank" style="color: white;">Cek Perkara</a></li>
+                                        <li><a href="https://bukutamu.kejaksaan.go.id/" target="_blank" style="color: white;">Buku Tamu</a></li>
+                                        <li><a href="https://tilang.kejaksaan.go.id/" target="_blank" style="color: white;">E-Tilang</a></li>
+                                        <li><a href="https://jdih.kejaksaan.go.id/" target="_blank" style="color: white;">JDIH</a></li>
+                                        <li><a href="https://e-prowas.kejaksaan.go.id/" target="_blank" style="color: white;">E-Prowas</a></li>
+                                        <li><a href="https://ppid.kejaksaan.go.id/" target="_blank" style="color: white;">E-PPID</a></li>
+                                        <li><a href="{{ route('sarana.detail') }}" style="color: white;">Sarana</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -60,7 +59,7 @@
                                     <a href="{{ route('gallery.show') }}" style="color: white;">Galeri</a>
                                 </li>
                                 <li>
-                                    <a href="#contact" style="color: white;">Kontak</a>
+                                    <a href="{{ route('welcome') }}#contact" style="color: white;">Kontak</a>
                                 </li>
                             </ul>
                         </div>
