@@ -54,7 +54,7 @@
                                     <a href="{{ route('news.all') }}" style="color: white;">Berita</a>
                                 </li>
                                 <li>
-                                    <a href="#survey" style="color: white;">Survey</a>
+                                    <a href="{{ route('survey.index') }}" style="color: white;">Survey</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('gallery.show') }}" style="color: white;">Galeri</a>

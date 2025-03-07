@@ -11,6 +11,8 @@ use App\Http\Controllers\SaranaController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\DashboardController;
 
 // Route untuk publik (tidak perlu auth)
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
@@ -36,7 +38,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Routes untuk admin (perlu auth)
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    // Route dashboard sekarang menggunakan DashboardController
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Routes untuk Profil
     Route::prefix('profil')->group(function () {
@@ -80,3 +83,6 @@ Route::get('/galeri', [GalleryController::class, 'show'])->name('gallery.show');
 Route::post('/gallery/video', [GalleryController::class, 'storeVideo'])->name('gallery.storeVideo');
 Route::put('/gallery/video/{id}', [GalleryController::class, 'updateVideo'])->name('gallery.updateVideo');
 Route::delete('/gallery/video/{id}', [GalleryController::class, 'destroyVideo'])->name('gallery.destroyVideo');
+
+Route::get('/survey', [SurveyController::class, 'index'])->name('survey.index');
+Route::post('/survey', [SurveyController::class, 'store'])->name('survey.store');

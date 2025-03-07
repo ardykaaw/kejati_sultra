@@ -1067,7 +1067,7 @@
                     <a class="page-scroll" href="{{ route('news.all') }}" style="color: white;">Berita</a>
                   </li>
                   <li>
-                    <a class="page-scroll" href="#survey" style="color: white;">Survey</a>
+                    <a class="page-scroll" href="{{ route('survey.index') }}" style="color: white;">Survey</a>
                   </li>
                   <li>
                     <a href="{{ route('gallery.show') }}" style="color: white;">Galeri</a>

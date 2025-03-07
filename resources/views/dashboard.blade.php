@@ -27,16 +27,16 @@
                     <div class="stats-card">
                         <div class="stats-header">
                             <div class="stats-icon">
-                                <i class="fas fa-file-alt"></i>
+                                <i class="fas fa-newspaper"></i>
                             </div>
                             <div class="stats-info">
-                                <div class="stats-value">245</div>
-                                <div class="stats-label">Total Dokumen</div>
+                                <div class="stats-value">{{ $totalNews }}</div>
+                                <div class="stats-label">Total Berita</div>
                             </div>
                         </div>
-                        <div class="stats-trend trend-up">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>12% dari bulan lalu</span>
+                        <div class="stats-trend {{ $newsPercentage >= 0 ? 'trend-up' : 'trend-down' }}">
+                            <i class="fas fa-arrow-{{ $newsPercentage >= 0 ? 'up' : 'down' }}"></i>
+                            <span>{{ abs($newsPercentage) }}% dari bulan lalu</span>
                         </div>
                     </div>
                 </div>
@@ -44,16 +44,16 @@
                     <div class="stats-card">
                         <div class="stats-header">
                             <div class="stats-icon">
-                                <i class="fas fa-calendar-check"></i>
+                                <i class="fas fa-image"></i>
                             </div>
                             <div class="stats-info">
-                                <div class="stats-value">8</div>
-                                <div class="stats-label">Jadwal Hari Ini</div>
+                                <div class="stats-value">{{ $totalImages }}</div>
+                                <div class="stats-label">Total Foto</div>
                             </div>
                         </div>
                         <div class="stats-trend trend-up">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>3 lebih banyak</span>
+                            <i class="fas fa-photo-video"></i>
+                            <span>Galeri Foto</span>
                         </div>
                     </div>
                 </div>
@@ -61,16 +61,16 @@
                     <div class="stats-card">
                         <div class="stats-header">
                             <div class="stats-icon">
-                                <i class="fas fa-users"></i>
+                                <i class="fas fa-video"></i>
                             </div>
                             <div class="stats-info">
-                                <div class="stats-value">124</div>
-                                <div class="stats-label">Total Pegawai</div>
+                                <div class="stats-value">{{ $totalVideos }}</div>
+                                <div class="stats-label">Total Video</div>
                             </div>
                         </div>
                         <div class="stats-trend trend-up">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>5 pegawai baru</span>
+                            <i class="fas fa-film"></i>
+                            <span>Galeri Video</span>
                         </div>
                     </div>
                 </div>
@@ -78,16 +78,16 @@
                     <div class="stats-card">
                         <div class="stats-header">
                             <div class="stats-icon">
-                                <i class="fas fa-tasks"></i>
+                                <i class="fas fa-chart-bar"></i>
                             </div>
                             <div class="stats-info">
-                                <div class="stats-value">7</div>
-                                <div class="stats-label">Tugas Aktif</div>
+                                <div class="stats-value">{{ $totalSurvey }}</div>
+                                <div class="stats-label">Total Responden</div>
                             </div>
                         </div>
-                        <div class="stats-trend trend-down">
-                            <i class="fas fa-arrow-down"></i>
-                            <span>2 selesai hari ini</span>
+                        <div class="stats-trend trend-up">
+                            <i class="fas fa-poll"></i>
+                            <span>Survey Kepuasan</span>
                         </div>
                     </div>
                 </div>
