@@ -21,7 +21,7 @@
                     <div class="card main-card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h3 class="card-title">Daftar Aduan Masyarakat</h3>
+                                <h3 class="card-title text-dark">Daftar Aduan Masyarakat</h3>
                                 <div class="card-tools">
                                     <div class="input-group">
                                         <input type="text" id="searchInput" class="form-control" placeholder="Cari aduan...">
