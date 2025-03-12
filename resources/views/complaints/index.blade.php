@@ -21,7 +21,7 @@
                     <div class="card main-card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h3 class="card-title" style="color: black;">Daftar Aduan Masyarakat</h3>
+                                <h3 class="card-title">Daftar Aduan Masyarakat</h3>
                                 <div class="card-tools">
                                     <div class="input-group">
                                         <input type="text" id="searchInput" class="form-control" placeholder="Cari aduan...">
@@ -58,9 +58,17 @@
                                             <td>{{ $complaint->email }}</td>
                                             <td>{{ $complaint->phone }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-link p-0" data-toggle="modal" data-target="#messageModal{{ $complaint->id }}">
+                                                <div class="message-preview">
                                                     {{ Str::limit($complaint->message, 50) }}
-                                                </button>
+                                                    @if(strlen($complaint->message) > 50)
+                                                        <button type="button" 
+                                                                class="btn btn-link btn-sm text-primary"
+                                                                data-bs-toggle="modal" 
+                                                                data-bs-target="#messageModal-{{ $complaint->id }}">
+                                                            Lihat Detail
+                                                        </button>
+                                                    @endif
+                                                </div>
                                             </td>
                                             <td>
                                                 <span class="badge bg-{{ $complaint->status == 'pending' ? 'warning' : ($complaint->status == 'process' ? 'info' : 'success') }}">
@@ -68,10 +76,14 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <form action="{{ route('complaints.updateStatus', $complaint->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('complaints.updateStatus', $complaint->id) }}" 
+                                                      method="POST" 
+                                                      class="d-inline">
                                                     @csrf
                                                     @method('PUT')
-                                                    <select name="status" class="form-select form-select-sm status-select" onchange="this.form.submit()">
+                                                    <select name="status" 
+                                                            class="form-select form-select-sm status-select" 
+                                                            onchange="this.form.submit()">
                                                         <option value="pending" {{ $complaint->status == 'pending' ? 'selected' : '' }}>Pending</option>
                                                         <option value="process" {{ $complaint->status == 'process' ? 'selected' : '' }}>Proses</option>
                                                         <option value="done" {{ $complaint->status == 'done' ? 'selected' : '' }}>Selesai</option>
@@ -80,26 +92,37 @@
                                             </td>
                                         </tr>
 
-                                        <!-- Message Modal -->
-                                        <div class="modal fade" id="messageModal{{ $complaint->id }}" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                        <!-- Modal Detail Aduan -->
+                                        <div class="modal fade" id="messageModal-{{ $complaint->id }}" tabindex="-1">
+                                            <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="messageModalLabel">Detail Aduan</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                                        <h5 class="modal-title">Detail Aduan</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="complaint-details">
-                                                            <p><strong>Nama:</strong> {{ $complaint->name }}</p>
-                                                            <p><strong>Email:</strong> {{ $complaint->email }}</p>
-                                                            <p><strong>No. Telepon:</strong> {{ $complaint->phone }}</p>
-                                                            <p><strong>Tanggal:</strong> {{ $complaint->created_at->format('d/m/Y H:i') }}</p>
-                                                            <p><strong>Status:</strong> {{ ucfirst($complaint->status) }}</p>
-                                                            <hr>
-                                                            <p><strong>Isi Aduan:</strong></p>
-                                                            <p class="complaint-message">{{ $complaint->message }}</p>
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <p><strong>Nama:</strong> {{ $complaint->name }}</p>
+                                                                    <p><strong>Email:</strong> {{ $complaint->email }}</p>
+                                                                    <p><strong>No. Telepon:</strong> {{ $complaint->phone }}</p>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p><strong>Tanggal:</strong> {{ $complaint->created_at->format('d/m/Y H:i') }}</p>
+                                                                    <p><strong>Status:</strong> 
+                                                                        <span class="badge bg-{{ $complaint->status == 'pending' ? 'warning' : ($complaint->status == 'process' ? 'info' : 'success') }}">
+                                                                            {{ ucfirst($complaint->status) }}
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="message-content">
+                                                                <h6 class="mb-3">Isi Aduan:</h6>
+                                                                <div class="message-box">
+                                                                    {{ $complaint->message }}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,6 +244,44 @@
             margin-top: 10px;
             width: 100%;
         }
+    }
+
+    .message-preview {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-link {
+        padding: 0;
+        text-decoration: none;
+    }
+
+    .btn-link:hover {
+        text-decoration: underline;
+    }
+
+    .message-box {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        white-space: pre-wrap;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .complaint-details {
+        padding: 15px;
+    }
+
+    .modal-body {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .badge {
+        font-weight: 500;
+        padding: 6px 10px;
     }
 </style>
 @endpush

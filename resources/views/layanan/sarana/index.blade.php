@@ -51,12 +51,14 @@
                                                     </a>
                                                     <form action="{{ route('sarana.destroy', $sarana->id) }}" 
                                                           method="POST" 
+                                                          id="delete-form-{{ $sarana->id }}"
                                                           class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" 
                                                                 class="btn btn-danger btn-sm"
-                                                                onclick="confirmDelete(this)">
+                                                                onclick="confirmDelete({{ $sarana->id }})"
+                                                                title="Hapus">
                                                             <i class="fas fa-trash"></i> Hapus
                                                         </button>
                                                     </form>
@@ -218,7 +220,7 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-function confirmDelete(button) {
+function confirmDelete(saranaId) {
     Swal.fire({
         title: 'Apakah Anda yakin?',
         text: "Data yang dihapus tidak dapat dikembalikan!",
@@ -231,11 +233,7 @@ function confirmDelete(button) {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            // Find the parent form and submit it
-            const form = button.closest('form');
-            if (form) {
-                form.submit();
-            }
+            document.getElementById('delete-form-' + saranaId).submit();
         }
     });
 }

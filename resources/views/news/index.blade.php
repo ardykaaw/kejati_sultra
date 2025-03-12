@@ -44,10 +44,18 @@
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="news-btn-delete" 
-                                                    onclick="confirmDelete('{{ $item->id }}')"
+                                                    onclick="confirmDelete({{ $item->id }})"
                                                     title="Hapus">
                                                 <i class="fas fa-trash"></i>
                                             </button>
+                                            
+                                            <form id="delete-form-{{ $item->id }}" 
+                                                  action="{{ route('news.destroy', $item->id) }}" 
+                                                  method="POST" 
+                                                  style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -63,13 +71,6 @@
         </div>
     </div>
 </div>
-
-<form id="delete-form-{{ $item->id }}" 
-      action="{{ route('news.destroy', $item->id) }}" 
-      method="POST" style="display: none;">
-    @csrf
-    @method('DELETE')
-</form>
 
 <style>
     .news-main-content {
@@ -271,7 +272,6 @@ function confirmDelete(newsId) {
     });
 }
 
-// Tampilkan alert sukses jika ada session success
 @if(session('success'))
     Swal.fire({
         icon: 'success',
@@ -282,7 +282,6 @@ function confirmDelete(newsId) {
     });
 @endif
 
-// Tampilkan alert error jika ada session error
 @if(session('error'))
     Swal.fire({
         icon: 'error',
