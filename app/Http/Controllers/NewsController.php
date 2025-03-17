@@ -8,9 +8,22 @@ use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::orderBy('created_at', 'desc')->get();
+        $query = News::query();
+        
+        // Search functionality
+        if ($request->has('search')) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('title', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('short_description', 'LIKE', "%{$searchTerm}%");
+            });
+        }
+        
+        // Get paginated results
+        $news = $query->latest()->paginate(10);
+        
         return view('news.index', compact('news'));
     }
 

@@ -145,52 +145,113 @@
             background: #006400;
         }
 
-        /* Pagination Styles */
+        /* Updated Pagination Styles */
+        .pagination-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
         .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
+            display: inline-flex;
+            align-items: center;
+            background: #fff;
+            padding: 5px;
+            margin: 0;
+            list-style: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
-        .pagination > li > a,
-        .pagination > li > span {
+        .page-item {
+            margin: 0 2px;
+        }
+
+        /* Previous/Next buttons */
+        .page-item:first-child .page-link,
+        .page-item:last-child .page-link {
+            font-weight: 500;
+            padding: 8px 15px;
             color: #006400;
-            border: 1px solid #006400;
-            margin: 0 3px;
-            padding: 8px 16px;
-            transition: all 0.3s ease;
+            min-width: auto;
+            border-radius: 6px;
         }
 
-        .pagination > .active > a,
-        .pagination > .active > span {
+        /* Numbers */
+        .page-link {
+            border: none;
+            padding: 8px 12px;
+            color: #006400;
+            background: transparent;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            min-width: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Active state */
+        .page-item.active .page-link {
             background-color: #006400;
-            border-color: #006400;
-            color: #fff;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 100, 0, 0.2);
         }
 
-        .pagination > li > a:hover,
-        .pagination > li > span:hover {
-            color: #fff;
-            background-color: #006400;
-            border-color: #006400;
+        /* Hover state */
+        .page-link:hover:not(.disabled) {
+            background-color: #e8f5e8;
+            color: #006400;
         }
 
+        /* Disabled state */
+        .page-item.disabled .page-link {
+            color: #aaa;
+            pointer-events: none;
+            background: transparent;
+        }
+
+        /* Pagination info text */
+        .pagination-info {
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .pagination-info span {
+            color: #006400;
+            font-weight: 500;
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .blog-page {
-                padding: 20px 0;
+            .pagination {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+                padding: 8px;
             }
 
-            .single-blog {
-                margin-bottom: 20px;
+            .page-link {
+                padding: 6px 10px;
+                min-width: 32px;
             }
 
-            .section-headline h2 {
-                font-size: 26px;
+            .page-item:first-child .page-link,
+            .page-item:last-child .page-link {
+                padding: 6px 12px;
             }
+        }
 
-            .blog-text h4 {
-                font-size: 16px;
-            }
+        /* Optional: Add smooth scrolling and selection styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: rgba(0, 100, 0, 0.1);
+            color: #006400;
         }
     </style>
 </head>
@@ -244,9 +305,43 @@
                 @endif
             </div>
             <!-- Pagination -->
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    {{ $allNews->links() }}
+            <div class="pagination-container">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {{-- Previous Page Link --}}
+                        @if ($allNews->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link">« Previous</span>
+                            </li>
+                        @else
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $allNews->previousPageUrl() }}">« Previous</a>
+                            </li>
+                        @endif
+
+                        {{-- Pagination Elements --}}
+                        @foreach ($allNews->getUrlRange(1, $allNews->lastPage()) as $page => $url)
+                            <li class="page-item {{ $page == $allNews->currentPage() ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        {{-- Next Page Link --}}
+                        @if ($allNews->hasMorePages())
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $allNews->nextPageUrl() }}">Next »</a>
+                            </li>
+                        @else
+                            <li class="page-item disabled">
+                                <span class="page-link">Next »</span>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+                <div class="pagination-info">
+                    Showing <span>{{ $allNews->firstItem() ?? 0 }}</span> 
+                    to <span>{{ $allNews->lastItem() ?? 0 }}</span> 
+                    of <span>{{ $allNews->total() }}</span> entries
                 </div>
             </div>
         </div>

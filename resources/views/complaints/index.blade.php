@@ -1,136 +1,138 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="wrapper d-flex align-items-stretch">
+<div class="news-main-content">
     @include('components.sidebar')
     
-    <div class="content-wrapper">
-        <div class="container-fluid">
-            <!-- Breadcrumb -->
-            <div class="content-header">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Aduan Masyarakat</li>
-                    </ol>
-                </nav>
-            </div>
+    <div class="news-content-wrapper">
+        <div class="news-content-container">
+            <div class="news-content-box">
+                <!-- Breadcrumb -->
+                <div class="content-header">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Aduan Masyarakat</li>
+                        </ol>
+                    </nav>
+                </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card main-card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h3 class="card-title text-dark">Daftar Aduan Masyarakat</h3>
-                                <div class="card-tools">
-                                    <div class="input-group">
-                                        <input type="text" id="searchInput" class="form-control" placeholder="Cari aduan...">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-search"></i>
-                                            </span>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card main-card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title text-dark">Daftar Aduan Masyarakat</h3>
+                                    <div class="card-tools">
+                                        <div class="input-group">
+                                            <input type="text" id="searchInput" class="form-control" placeholder="Cari aduan...">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover" id="complaintsTable">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tanggal</th>
-                                            <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>No. Telepon</th>
-                                            <th>Pesan</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($complaints as $complaint)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $complaint->created_at->format('d/m/Y H:i') }}</td>
-                                            <td>{{ $complaint->name }}</td>
-                                            <td>{{ $complaint->email }}</td>
-                                            <td>{{ $complaint->phone }}</td>
-                                            <td>
-                                                <div class="message-preview">
-                                                    {{ Str::limit($complaint->message, 50) }}
-                                                    @if(strlen($complaint->message) > 50)
-                                                        <button type="button" 
-                                                                class="btn btn-link btn-sm text-primary"
-                                                                data-bs-toggle="modal" 
-                                                                data-bs-target="#messageModal-{{ $complaint->id }}">
-                                                            Lihat Detail
-                                                        </button>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="badge bg-{{ $complaint->status == 'pending' ? 'warning' : ($complaint->status == 'process' ? 'info' : 'success') }}">
-                                                    {{ ucfirst($complaint->status) }}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <form action="{{ route('complaints.updateStatus', $complaint->id) }}" 
-                                                      method="POST" 
-                                                      class="d-inline">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <select name="status" 
-                                                            class="form-select form-select-sm status-select" 
-                                                            onchange="this.form.submit()">
-                                                        <option value="pending" {{ $complaint->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                                        <option value="process" {{ $complaint->status == 'process' ? 'selected' : '' }}>Proses</option>
-                                                        <option value="done" {{ $complaint->status == 'done' ? 'selected' : '' }}>Selesai</option>
-                                                    </select>
-                                                </form>
-                                            </td>
-                                        </tr>
-
-                                        <!-- Modal Detail Aduan -->
-                                        <div class="modal fade" id="messageModal-{{ $complaint->id }}" tabindex="-1">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Detail Aduan</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover" id="complaintsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal</th>
+                                                <th>Nama</th>
+                                                <th>Email</th>
+                                                <th>No. Telepon</th>
+                                                <th>Pesan</th>
+                                                <th>Status</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($complaints as $complaint)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $complaint->created_at->format('d/m/Y H:i') }}</td>
+                                                <td>{{ $complaint->name }}</td>
+                                                <td>{{ $complaint->email }}</td>
+                                                <td>{{ $complaint->phone }}</td>
+                                                <td>
+                                                    <div class="message-preview">
+                                                        {{ Str::limit($complaint->message, 50) }}
+                                                        @if(strlen($complaint->message) > 50)
+                                                            <button type="button" 
+                                                                    class="btn btn-link btn-sm text-primary"
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#messageModal-{{ $complaint->id }}">
+                                                                Lihat Detail
+                                                            </button>
+                                                        @endif
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <div class="complaint-details">
-                                                            <div class="row mb-3">
-                                                                <div class="col-md-6">
-                                                                    <p><strong>Nama:</strong> {{ $complaint->name }}</p>
-                                                                    <p><strong>Email:</strong> {{ $complaint->email }}</p>
-                                                                    <p><strong>No. Telepon:</strong> {{ $complaint->phone }}</p>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-{{ $complaint->status == 'pending' ? 'warning' : ($complaint->status == 'process' ? 'info' : 'success') }}">
+                                                        {{ ucfirst($complaint->status) }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <form action="{{ route('complaints.updateStatus', $complaint->id) }}" 
+                                                          method="POST" 
+                                                          class="d-inline">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <select name="status" 
+                                                                class="form-select form-select-sm status-select" 
+                                                                onchange="this.form.submit()">
+                                                            <option value="pending" {{ $complaint->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                            <option value="process" {{ $complaint->status == 'process' ? 'selected' : '' }}>Proses</option>
+                                                            <option value="done" {{ $complaint->status == 'done' ? 'selected' : '' }}>Selesai</option>
+                                                        </select>
+                                                    </form>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Modal Detail Aduan -->
+                                            <div class="modal fade" id="messageModal-{{ $complaint->id }}" tabindex="-1">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Detail Aduan</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="complaint-details">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-6">
+                                                                        <p><strong>Nama:</strong> {{ $complaint->name }}</p>
+                                                                        <p><strong>Email:</strong> {{ $complaint->email }}</p>
+                                                                        <p><strong>No. Telepon:</strong> {{ $complaint->phone }}</p>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <p><strong>Tanggal:</strong> {{ $complaint->created_at->format('d/m/Y H:i') }}</p>
+                                                                        <p><strong>Status:</strong> 
+                                                                            <span class="badge bg-{{ $complaint->status == 'pending' ? 'warning' : ($complaint->status == 'process' ? 'info' : 'success') }}">
+                                                                                {{ ucfirst($complaint->status) }}
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <p><strong>Tanggal:</strong> {{ $complaint->created_at->format('d/m/Y H:i') }}</p>
-                                                                    <p><strong>Status:</strong> 
-                                                                        <span class="badge bg-{{ $complaint->status == 'pending' ? 'warning' : ($complaint->status == 'process' ? 'info' : 'success') }}">
-                                                                            {{ ucfirst($complaint->status) }}
-                                                                        </span>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="message-content">
-                                                                <h6 class="mb-3">Isi Aduan:</h6>
-                                                                <div class="message-box">
-                                                                    {{ $complaint->message }}
+                                                                <div class="message-content">
+                                                                    <h6 class="mb-3">Isi Aduan:</h6>
+                                                                    <div class="message-box">
+                                                                        {{ $complaint->message }}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -142,19 +144,56 @@
 
 @push('styles')
 <style>
-    /* Sidebar Fix */
-    #sidebar {
-        position: fixed;
-        height: 100vh;
-        overflow-y: auto;
+    .news-main-content {
+        display: flex;
+        min-height: 100vh;
+        background: #f5f7fb;
+        width: 100%;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .news-content-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .news-content-container {
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .news-content-box {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 30px;
+        width: 100%;
+        transition: all 0.3s ease-in-out;
     }
 
     /* Content Wrapper */
     .content-wrapper {
-        margin-left: 250px;
+        margin-left: 250px; /* Sesuaikan dengan lebar sidebar yang sudah ada */
         padding: 20px;
         min-height: 100vh;
         background: #f4f6f9;
+        width: calc(100% - 250px);
+        position: relative;
+        z-index: 1; /* Pastikan content berada di belakang sidebar */
+    }
+
+    /* Wrapper utama */
+    .wrapper {
+        min-height: 100vh;
+        display: flex;
+        position: relative;
+        overflow-x: hidden; /* Mencegah scroll horizontal */
     }
 
     /* Card Styling */
@@ -162,6 +201,7 @@
         margin-top: 20px;
         border-radius: 8px;
         box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        background: white;
     }
 
     .card-header {
@@ -225,23 +265,24 @@
         margin-top: 10px;
     }
 
-    /* Responsive */
+    /* Responsive Design */
     @media (max-width: 768px) {
+        .news-content-wrapper {
+            padding: 10px;
+        }
+
+        .news-content-box {
+            padding: 20px;
+        }
+
+        .news-header-wrapper {
+            flex-direction: column;
+            gap: 15px;
+            align-items: stretch;
+        }
+
         .content-wrapper {
             margin-left: 0;
-        }
-
-        .input-group {
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .card-header {
-            flex-direction: column;
-        }
-
-        .card-tools {
-            margin-top: 10px;
             width: 100%;
         }
     }
